@@ -1,6 +1,8 @@
 package nehe.chatappapi.Services;
 
 
+import nehe.chatappapi.Repositories.UserRepository;
+import nehe.chatappapi.security.MyUserPrincpal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -11,11 +13,17 @@ public class UserDetailsService implements org.springframework.security.core.use
 
 
     @Autowired
+    private UserRepository userRepository;
+
     public UserDetailsService(){}
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-        return null;
+        var user = userRepository.findByEmail(email);
+
+        if(user ==null) throw new UsernameNotFoundException("User with email: "+ email + "not found");
+
+        return new MyUserPrincpal(user);
     }
 }
