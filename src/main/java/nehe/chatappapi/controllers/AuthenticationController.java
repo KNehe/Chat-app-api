@@ -49,7 +49,6 @@ public class AuthenticationController {
 		var modifiedUser = new UserRes( savedUser.getId(), savedUser.getFirstName() ,
 				savedUser.getLastName(), savedUser.getEmail(), savedUser.getRole());
 
-
 		return ResponseEntity.ok(new RegisterResponse(token, modifiedUser));
 	}
 

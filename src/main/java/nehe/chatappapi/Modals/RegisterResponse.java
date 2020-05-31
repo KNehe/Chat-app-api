@@ -1,17 +1,22 @@
 package nehe.chatappapi.Modals;
 
-import java.io.Serializable;
 
-public class RegisterResponse implements Serializable {
+public class RegisterResponse {
 
-	private static final long serialVersionUID = 5926468583005150707L;
+	private  String jwtToken;
+	private  Object user;
 
-	private final String jwtToken;
-	private final Object object;
-
-	public RegisterResponse(String jwtToken, Object object) {
+	public RegisterResponse(String jwtToken, Object user) {
 		this.jwtToken = jwtToken;
-		this.object = object;
+		this.user = user;
+	}
+
+	public Object getUser() {
+		return user;
+	}
+
+	public String getJwtToken() {
+		return jwtToken;
 	}
 
 }

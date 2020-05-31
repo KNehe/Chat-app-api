@@ -1,5 +1,6 @@
 package nehe.chatappapi.Services;
 
+import nehe.chatappapi.Exception.DuplicateEmailException;
 import nehe.chatappapi.Modals.User;
 import nehe.chatappapi.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,11 @@ public class AuthService {
     @Autowired
     public  AuthService(UserRepository userRepository){ this.userRepository = userRepository;}
 
-    public User addUser(User user){
+    public User addUser(User user) throws DuplicateEmailException {
 
       user.setPassword( new BCryptPasswordEncoder().encode( user.getPassword()));
+
+      if(userRepository.findByEmail(user.getEmail()) != null ) throw new DuplicateEmailException( user.getEmail());
 
      return userRepository.insert(user);
 
