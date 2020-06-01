@@ -5,6 +5,7 @@ import nehe.chatappapi.Modals.*;
 import nehe.chatappapi.Services.AuthService;
 import nehe.chatappapi.Utils.AuthUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,7 +50,7 @@ public class AuthenticationController {
 		var modifiedUser = new UserRes( savedUser.getId(), savedUser.getFirstName() ,
 				savedUser.getLastName(), savedUser.getEmail(), savedUser.getRole());
 
-		return ResponseEntity.ok(new RegisterResponse(token, modifiedUser));
+		return ResponseEntity.status(HttpStatus.CREATED).body(new RegisterResponse(token, modifiedUser));
 	}
 
 	
