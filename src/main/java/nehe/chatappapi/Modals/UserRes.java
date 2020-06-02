@@ -16,6 +16,10 @@ public class UserRes{
         this.role = role;
     }
 
+    public String getId() {
+        return id;
+    }
+
     public String getFirstName() {
         return firstName;
     }
